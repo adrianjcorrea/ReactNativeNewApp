@@ -1,15 +1,31 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import ListItem from './src/components/listItem/ListItem.js';
 
 export default class App extends React.Component {
   state={
-    placeName: ""
-  }
+    placeName: "",
+    places: []
+  };
 
 changeTextHandler = (value) => {
   this.setState({placeName: value});
 }
+
+placeSubmitHandler = () => {
+if(this.state.placeName.trim() === ''){
+  return;
+}
+this.setState(prevState => {
+  return {
+    places: prevState.places.concat(prevState.placeName)
+  };
+});
+};
   render() {
+    const placesOutput = this.state.places.map((place, i) =>(
+      <ListItem key={i} placeName={place} />
+    ));
     return (
       <View style={styles.container}>
        <View style={styles.inputContainer}>
@@ -22,7 +38,11 @@ changeTextHandler = (value) => {
         />
         < Button
           title="ADD"
+          onPress={this.placeSubmitHandler}
         />
+        </View>
+        <View>
+         {placesOutput}
         </View>
       </View>
     );
