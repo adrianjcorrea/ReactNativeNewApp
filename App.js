@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, TextInput} from 'react-native';
 
 export default class App extends React.Component {
   state={
-    name: ""
+    placeName: ""
   }
 
 changeTextHandler = (value) => {
-  this.setState({name: value});
+  this.setState({placeName: value});
 }
   render() {
     return (
@@ -15,7 +15,8 @@ changeTextHandler = (value) => {
         <Text>Adrians first mobile app!</Text>
         < TextInput
         style={{ width: 300,borderColor: 'black', borderWidth:1}}
-        value={this.state.name}
+        placeholder='Enter Name of place'
+        value={this.state.placeName}
         onChangeText={this.changeTextHandler}
 
         />
