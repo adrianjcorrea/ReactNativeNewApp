@@ -12,12 +12,11 @@ changeTextHandler = (value) => {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Adrians first mobile app!</Text>
         < TextInput
-        style={{ width: 300,borderColor: 'black', borderWidth:1}}
-        placeholder='Enter Name of place'
-        value={this.state.placeName}
-        onChangeText={this.changeTextHandler}
+          style={{ width: 300,borderColor: 'black', borderWidth:1}}
+          placeholder=' Enter Name of place'
+          value={this.state.placeName}
+          onChangeText={this.changeTextHandler}
 
         />
       </View>
@@ -27,9 +26,13 @@ changeTextHandler = (value) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+  //  flex: 1,
+  //added padding due to dysplaing under status bar on phone.
+    padding: 25,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    //changed to flex startdo to flex box displaying diffent color
+    //now flex is to full view again
+    justifyContent: 'flex-start',
   },
 });
