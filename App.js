@@ -21,7 +21,6 @@ changeTextHandler = (value) => {
 
         />
         < Button
-         style={styles.placeButton}
           title="ADD"
         />
         </View>
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     width:'100%',
     //ading direction row for my button to be next to text input
       flexDirection:'row',
-      //I want a space between my to input and button.
+      //I want a space between my input and button.
       justifyContent:'space-between',
       alignItems:'center'
     },
