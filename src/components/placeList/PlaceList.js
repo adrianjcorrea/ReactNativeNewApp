@@ -5,11 +5,15 @@ import ListItem from '../listItem/ListItem.js';
 
 const placeList = props => {
     const placesOutput = props.places.map((place, i) => (
-        <ListItem key={i} placeName={place} onPress={this.onItemPress} />
+        <ListItem
+          key={i}
+          placeName={place}
+          onItemPressed={() => alert("Item pressed - ID:" + i)}
+        />
       ));
-    return (
+    return(
         <View style={styles.listContainer}>{placesOutput}</View>
-    );
+      );
 };
 
 const styles = StyleSheet.create({

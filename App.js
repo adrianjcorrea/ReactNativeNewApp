@@ -30,6 +30,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    //added padding due to dysplaing under status bar on phone.
     padding: 26,
     backgroundColor: "#fff",
     alignItems: "center",

@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     // flex: 1,
     width: "100%",
+    //ading direction row for content to align in a row.
     flexDirection: "row",
+    //I want a space between my input and button.
     justifyContent: "space-between",
     alignItems: "center"
   },
