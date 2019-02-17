@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const ListItem = (props) => (
-
-  <View styles={styles.listItem} >
-   <Text>{props.placeName}</Text>
-  </View>
+const listItem = (props) => (
+    <View style={styles.listItem} onPress={props.onItemPress}>
+        <Text>{props.placeName}</Text>
+    </View>
 );
 
 const styles = StyleSheet.create({
-  listItem: {
-    width: "100%",
-    padding:10,
-    backgroundColor: "#eee"
-  }
+    listItem: {
+        width: "100%",
+        marginBottom: 5,
+        padding: 10,
+        backgroundColor: "#eee"
+    }
 });
 
-export default ListItem;
+export default listItem;

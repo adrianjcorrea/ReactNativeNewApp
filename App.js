@@ -1,49 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
-import ListItem from './src/components/listItem/ListItem.js';
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
 
-export default class App extends React.Component {
-  state={
-    placeName: "",
+import PlaceInput from "./src/components/placeInput/PlaceInput.js";
+import PlaceList from "./src/components/placeList/PlaceList.js";
+
+export default class App extends Component {
+  state = {
     places: []
   };
 
-changeTextHandler = (value) => {
-  this.setState({placeName: value});
-}
-
-placeSubmitHandler = () => {
-if(this.state.placeName.trim() === ''){
-  return;
-}
-this.setState(prevState => {
-  return {
-    places: prevState.places.concat(prevState.placeName)
+  placeAddedHandler = placeName => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.concat(placeName)
+      };
+    });
   };
-});
-};
+
   render() {
-    const placesOutput = this.state.places.map((place, i) =>(
-      <ListItem key={i} placeName={place} />
-    ));
     return (
       <View style={styles.container}>
-       <View style={styles.inputContainer}>
-        < TextInput
-          style={styles.placeInput}
-          placeholder=' Enter Name of place'
-          value={this.state.placeName}
-          onChangeText={this.changeTextHandler}
-
-        />
-        < Button
-          title="ADD"
-          onPress={this.placeSubmitHandler}
-        />
-        </View>
-        <View>
-         {placesOutput}
-        </View>
+        <PlaceInput onPlaceAdded={this.placeAddedHandler} />
+        <PlaceList places={this.state.places} />
       </View>
     );
   }
@@ -51,27 +29,10 @@ this.setState(prevState => {
 
 const styles = StyleSheet.create({
   container: {
-  //  flex: 1,
-  //added padding due to dysplaing under status bar on phone.
-    padding: 25,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    //changed to flex startdo to flex box displaying diffent color
-    //now flex is to full view again
-    justifyContent: 'flex-start'
-  },
-   inputContainer: {
-    width:'100%',
-    //ading direction row for my button to be next to text input
-      flexDirection:'row',
-      //I want a space between my input and button.
-      justifyContent:'space-between',
-      alignItems:'center'
-    },
-      placeInput: {
-      width:'80%',
-      borderColor: 'black',
-      borderWidth:1
-    },
-
+    flex: 1,
+    padding: 26,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "flex-start"
+  }
 });
