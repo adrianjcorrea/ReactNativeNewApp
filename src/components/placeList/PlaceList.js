@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
 import ListItem from '../listItem/ListItem.js';
 
@@ -11,7 +11,8 @@ const placeList = props => {
         data={props.places}
         renderItem={(info) => (
           <ListItem
-          placeName={info.item.value}
+          placeName={info.item.name}
+          placeImage={info.item.image}
           //Deletind Item when pressed.
           onItemPressed={() => props.onItemDeleted(info.item.key)}
         /> 
