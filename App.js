@@ -1,45 +1,71 @@
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 
-import PlaceInput from "./src/components/placeInput/PlaceInput.js";
-import PlaceList from "./src/components/placeList/PlaceList.js";
-import placeImage from "./assets/Chicago.jpg"
+import PlaceInput from "./src/components/placeInput/PlaceInput";
+import PlaceList from "./src/components/placeList/PlaceList";
+import PlaceDetail from "./src/components/placeDetail/PlaceDetail";
 
 export default class App extends Component {
   state = {
-    places: []
+    places: [],
+    selectedPlace: null
   };
 
   placeAddedHandler = placeName => {
     this.setState(prevState => {
       return {
         places: prevState.places.concat({
-          key: Math.floor(Math.random() * (100 -1)) + 1
-           , name: placeName,
-             image: {
-               uri: "https://c1.staticflickr.com/9/8002/7645571426_6391c3b369_b.jpg"
-             }
+          key: Math.floor(Math.random() * (100 -1)) + 1,
+          name: placeName,
+          image: {
+            uri:
+              "https://c1.staticflickr.com/9/8002/7645571426_6391c3b369_b.jpg"
+          }
         })
       };
     });
   };
 
-  placeDeletedHandler = key => {
-      this.setState(prevState =>{
-        return{
-      places: prevState.places.filter(place => {
-        //true for Item stays on the Array false if it dosent.
-        return place.key !== key;
-      })
-    };
-   });
-  }
+  placeDeletedHandler = () => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter(place => {
+          return place.key !== prevState.selectedPlace.key;
+        }),
+        selectedPlace: null
+      };
+    });
+  };
+
+  modalClosedHandler = () => {
+    this.setState({
+      selectedPlace: null
+    });
+  };
+
+  placeSelectedHandler = key => {
+    this.setState(prevState => {
+      return {
+        selectedPlace: prevState.places.find(place => {
+          return place.key === key;
+        })
+      };
+    });
+  };
 
   render() {
     return (
       <View style={styles.container}>
+        <PlaceDetail
+          selectedPlace={this.state.selectedPlace}
+          onItemDeleted={this.placeDeletedHandler}
+          onModalClosed={this.modalClosedHandler}
+        />
         <PlaceInput onPlaceAdded={this.placeAddedHandler} />
-        <PlaceList places={this.state.places} onItemDeleted={this.placeDeletedHandler}/>
+        <PlaceList
+          places={this.state.places}
+          onItemSelected={this.placeSelectedHandler}
+        />
       </View>
     );
   }
@@ -48,7 +74,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //added padding due to dysplaing under status bar on phone.
     padding: 26,
     backgroundColor: "#fff",
     alignItems: "center",
