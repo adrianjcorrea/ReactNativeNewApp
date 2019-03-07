@@ -1,4 +1,4 @@
-import {ADD_PLACE, DELETE_PLACE, DESELECT_PLACE, SELECT_PLACE};
+import {ADD_PLACE, DELETE_PLACE, DESELECT_PLACE, SELECT_PLACE} from "./actionTypes.js";;
 
 export const addPlace = (placeName) => {
   return {
